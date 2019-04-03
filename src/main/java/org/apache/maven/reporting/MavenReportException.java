@@ -24,7 +24,6 @@ package org.apache.maven.reporting;
  *
  * @author Brett Porter
  * @author <a href="evenisse@apache.org">Emmanuel Venisse</a>
- * @version $Id$
  * @since 2.0
  */
 public class MavenReportException
