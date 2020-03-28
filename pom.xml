@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.shared</groupId>
     <artifactId>maven-shared-components</artifactId>
-    <version>33</version>
+    <version>34</version>
     <relativePath/>
   </parent>
 
@@ -77,7 +77,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.doxia</groupId>
       <artifactId>doxia-sink-api</artifactId>
-      <version>1.0</version>
+      <version>1.9.1</version>
     </dependency>
   </dependencies>
 </project>
