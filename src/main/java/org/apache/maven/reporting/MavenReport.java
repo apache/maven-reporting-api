@@ -102,16 +102,16 @@ public interface MavenReport
      * An external report is a report which calls a third party program which generates some reports too.
      * A good example is javadoc tool.
      *
-     * @return <tt>true</tt> if this report is external, <tt>false</tt> otherwise.
-     * Default should be <tt>false</tt>.
+     * @return {@code true} if this report is external, {@code false} otherwise.
+     * Default should be {@code false}.
      */
     boolean isExternalReport();
 
     /**
      * Verify some conditions before generate the report.
      *
-     * @return <tt>true</tt> if this report could be generated, <tt>false</tt> otherwise.
-     * Default should be <tt>true</tt>.
+     * @return {@code true} if this report could be generated, {@code false} otherwise.
+     * Default should be {@code true}.
      */
     boolean canGenerateReport();
 }

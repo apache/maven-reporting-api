@@ -36,6 +36,13 @@ import java.util.Locale;
 public interface MavenMultiPageReport
     extends MavenReport
 {
+    /**
+     * Generate multi page report.
+     *
+     * @param sink The sink to write to.
+     * @param locale The locale to use.
+     * @throws MavenReportException if an error occurs.
+     */
     void generate( Sink sink, SinkFactory sinkFactory, Locale locale )
         throws MavenReportException;
 }
