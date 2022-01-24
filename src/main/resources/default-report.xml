@@ -20,6 +20,6 @@ under the License.
 
 <project name="${project.name}">
   <body>
-    ${reports}
+    <menu ref="reports"/>
   </body>
 </project>
