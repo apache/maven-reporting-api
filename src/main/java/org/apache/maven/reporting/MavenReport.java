@@ -19,7 +19,7 @@ package org.apache.maven.reporting;
  * under the License.
  */
 
-import org.codehaus.doxia.sink.Sink;
+import org.apache.maven.doxia.sink.Sink;
 
 import java.io.File;
 import java.util.Locale;
