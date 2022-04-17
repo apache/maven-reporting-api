@@ -70,7 +70,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <javaVersion>7</javaVersion>
+    <javaVersion>8</javaVersion>
     <project.build.outputTimestamp>2022-02-01T20:52:04Z</project.build.outputTimestamp>
   </properties>
 
