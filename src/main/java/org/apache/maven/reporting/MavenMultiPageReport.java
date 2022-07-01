@@ -41,6 +41,7 @@ public interface MavenMultiPageReport
      *
      * @param sink The sink to write to.
      * @param locale The locale to use.
+     * @param sinkFactory the sink factory to create sub sinks.
      * @throws MavenReportException if an error occurs.
      */
     void generate( Sink sink, SinkFactory sinkFactory, Locale locale )
