@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.shared</groupId>
     <artifactId>maven-shared-components</artifactId>
-    <version>34</version>
+    <version>36</version>
     <relativePath />
   </parent>
 
@@ -71,26 +71,10 @@ under the License.
 
   <properties>
     <javaVersion>8</javaVersion>
+    <mavenVersion>3.2.5</mavenVersion>
     <project.build.outputTimestamp>2022-04-17T16:19:42Z</project.build.outputTimestamp>
   </properties>
 
-  <build>
-    <!-- TODO Remove when updating to Parent 26 -->
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.3.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.2.2</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
   <dependencies>
     <dependency>
       <groupId>org.apache.maven.doxia</groupId>
