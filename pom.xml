@@ -36,18 +36,6 @@ under the License.
   <name>Apache Maven Reporting API</name>
   <description>API to manage report generation.</description>
 
-  <developers>
-    <developer>
-      <id>vsiveton</id>
-      <name>Vincent Siveton</name>
-      <email>vincent.siveton@gmail.com</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-      <timezone>-5</timezone>
-    </developer>
-  </developers>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-reporting-api.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-reporting-api.git</developerConnection>
