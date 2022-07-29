@@ -30,7 +30,7 @@ import java.util.Locale;
  * method dropped. But that would have rendered all reporting mojo's uncompilable and binary incompatible.
  *
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
- * @see MavenReport#generate(Sink, Locale)
+ * @see MavenReport#generate(org.codehaus.doxia.sink.Sink, Locale)
  * @since 3.0 (copied in maven-site-plugin 2.0-beta-6)
  */
 public interface MavenMultiPageReport
