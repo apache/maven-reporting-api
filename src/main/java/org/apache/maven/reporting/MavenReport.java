@@ -49,7 +49,7 @@ public interface MavenReport
      * Mainly used for external reports like javadoc.
      *
      * @param sink the sink to use for the generation.
-     * @param locale the wanted locale to generate the report, could be null.
+     * @param locale the wanted locale to generate the report.
      * @throws MavenReportException if any
      */
     void generate( Sink sink, Locale locale )
@@ -73,7 +73,7 @@ public interface MavenReport
     /**
      * Get the localized report name.
      *
-     * @param locale the wanted locale to return the report's name, could be null.
+     * @param locale the wanted locale to return the report's name.
      * @return the name of this report.
      */
     String getName( Locale locale );
@@ -81,7 +81,7 @@ public interface MavenReport
     /**
      * Get the localized report description.
      *
-     * @param locale the wanted locale to return the report's description, could be null.
+     * @param locale the wanted locale to return the report's description.
      * @return the description of this report.
      */
     String getDescription( Locale locale );
