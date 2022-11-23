@@ -31,7 +31,7 @@ under the License.
 
   <groupId>org.apache.maven.reporting</groupId>
   <artifactId>maven-reporting-api</artifactId>
-  <version>4.0.0-M3-SNAPSHOT</version>
+  <version>4.0.0-M3</version>
 
   <name>Apache Maven Reporting API</name>
   <description>API to manage report generation.</description>
@@ -40,7 +40,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-reporting-api.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-reporting-api.git</developerConnection>
     <url>https://github.com/apache/maven-reporting-api/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
+    <tag>maven-reporting-api-4.0.0-M3</tag>
   </scm>
   <issueManagement>
     <system>jira</system>
@@ -60,7 +60,7 @@ under the License.
   <properties>
     <javaVersion>8</javaVersion>
     <mavenVersion>3.2.5</mavenVersion>
-    <project.build.outputTimestamp>2022-07-01T16:39:14Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2022-11-23T19:28:00Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
