@@ -1,5 +1,3 @@
-package org.apache.maven.reporting;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -9,7 +7,7 @@ package org.apache.maven.reporting;
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -18,6 +16,7 @@ package org.apache.maven.reporting;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.reporting;
 
 /**
  * Basis for rendering report.
@@ -29,8 +28,7 @@ package org.apache.maven.reporting;
  * that could take a velocity template and pipe that through Doxia rather than coding
  * them up like this.
  */
-public interface MavenReportRenderer
-{
+public interface MavenReportRenderer {
     /**
      * @return the wanted report's title.
      */

@@ -1,5 +1,3 @@
-package org.apache.maven.reporting;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -9,7 +7,7 @@ package org.apache.maven.reporting;
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -18,11 +16,12 @@ package org.apache.maven.reporting;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.reporting;
+
+import java.util.Locale;
 
 import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.doxia.sink.SinkFactory;
-
-import java.util.Locale;
 
 /**
  * Interface created separately for backwards compatibility. This method
@@ -33,9 +32,7 @@ import java.util.Locale;
  * @see MavenReport#generate(Sink, Locale)
  * @since 3.0 (copied in maven-site-plugin 2.0-beta-6)
  */
-public interface MavenMultiPageReport
-    extends MavenReport
-{
+public interface MavenMultiPageReport extends MavenReport {
     /**
      * Generate multi page report.
      *
@@ -44,6 +41,5 @@ public interface MavenMultiPageReport
      * @param sinkFactory the sink factory to create sub sinks.
      * @throws MavenReportException if an error occurs.
      */
-    void generate( Sink sink, SinkFactory sinkFactory, Locale locale )
-        throws MavenReportException;
+    void generate(Sink sink, SinkFactory sinkFactory, Locale locale) throws MavenReportException;
 }

@@ -1,5 +1,3 @@
-package org.apache.maven.reporting;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -9,7 +7,7 @@ package org.apache.maven.reporting;
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -18,6 +16,7 @@ package org.apache.maven.reporting;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.reporting;
 
 import java.io.File;
 import java.util.Locale;
@@ -32,8 +31,7 @@ import org.apache.maven.doxia.sink.Sink;
  * @author <a href="mailto:vincent.siveton@gmail.com">Vincent Siveton</a>
  * @since 2.0
  */
-public interface MavenReport
-{
+public interface MavenReport {
     /** Plexus lookup name */
     String ROLE = MavenReport.class.getName();
 
@@ -52,8 +50,7 @@ public interface MavenReport
      * @param locale the wanted locale to generate the report.
      * @throws MavenReportException if any
      */
-    void generate( Sink sink, Locale locale )
-        throws MavenReportException;
+    void generate(Sink sink, Locale locale) throws MavenReportException;
 
     /**
      * Get the base name used to create report's output file(s).
@@ -76,7 +73,7 @@ public interface MavenReport
      * @param locale the wanted locale to return the report's name.
      * @return the name of this report.
      */
-    String getName( Locale locale );
+    String getName(Locale locale);
 
     /**
      * Get the localized report description.
@@ -84,14 +81,14 @@ public interface MavenReport
      * @param locale the wanted locale to return the report's description.
      * @return the description of this report.
      */
-    String getDescription( Locale locale );
+    String getDescription(Locale locale);
 
     /**
      * Set a new output directory. Useful for staging.
      *
      * @param outputDirectory the new output directory
      */
-    void setReportOutputDirectory( File outputDirectory );
+    void setReportOutputDirectory(File outputDirectory);
 
     /**
      * @return the current report output directory.
