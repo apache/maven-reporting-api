@@ -109,6 +109,7 @@ public interface MavenReport {
      *
      * @return {@code true} if this report can be generated, {@code false} otherwise.
      * Default should be {@code true}.
+     * @throws MavenReportException if any
      */
-    boolean canGenerateReport();
+    boolean canGenerateReport() throws MavenReportException;
 }
