@@ -105,9 +105,9 @@ public interface MavenReport {
     boolean isExternalReport();
 
     /**
-     * Verify some conditions before generate the report.
+     * Verify some conditions before generating the report.
      *
-     * @return {@code true} if this report could be generated, {@code false} otherwise.
+     * @return {@code true} if this report can be generated, {@code false} otherwise.
      * Default should be {@code true}.
      */
     boolean canGenerateReport();
