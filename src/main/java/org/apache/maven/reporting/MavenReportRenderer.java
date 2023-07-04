@@ -36,6 +36,7 @@ public interface MavenReportRenderer {
 
     /**
      * Renderer a report.
+     * @throws MavenReportException if any
      */
-    void render();
+    void render() throws MavenReportException;
 }
