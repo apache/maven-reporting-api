@@ -53,10 +53,25 @@ public interface MavenReport {
     void generate(Sink sink, Locale locale) throws MavenReportException;
 
     /**
-     * Get the base name used to create report's output file(s).
+     * Get the path relative to {@link #getReportOutputDirectory()} where the report's main output
+     * file will be written. The last component is the name of the file without any extension. The
+     * actual output extension will by added by the sink implementation.
+     * <p>
+     * Note: This method won't be {@code default} anymore when {@link #getOutputName()} is removed.
+     * You are advised to implement it as soon as possible.
      *
-     * @return the output name of this report.
+     * @since 4.0.0
+     * @return the relative output path of this report
      */
+    default String getOutputPath() {
+        return getOutputName();
+    }
+
+    /**
+     * @deprecated Method name does not properly reflect its purpose. Implement and use
+     * {@link #getOutputPath()} instead.
+     */
+    @Deprecated
     String getOutputName();
 
     /**
@@ -71,7 +86,7 @@ public interface MavenReport {
      * Get the localized report name.
      *
      * @param locale the wanted locale to return the report's name.
-     * @return the name of this report.
+     * @return the name of this report
      */
     String getName(Locale locale);
 
@@ -79,19 +94,22 @@ public interface MavenReport {
      * Get the localized report description.
      *
      * @param locale the wanted locale to return the report's description.
-     * @return the description of this report.
+     * @return the description of this report
      */
     String getDescription(Locale locale);
 
     /**
-     * Set a new output directory. Useful for staging.
+     * Set a new shared report output directory. This directory may contain the output of other
+     * reports as well.
      *
-     * @param outputDirectory the new output directory
+     * @param outputDirectory the new shared report output directory
      */
     void setReportOutputDirectory(File outputDirectory);
 
     /**
-     * @return the current report output directory.
+     * Get the shared report output directory.
+     *
+     * @return the current shared report output directory
      */
     File getReportOutputDirectory();
 
