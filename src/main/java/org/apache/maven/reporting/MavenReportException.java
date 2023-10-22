@@ -32,19 +32,19 @@ public class MavenReportException extends Exception {
     /**
      * Default constructor.
      *
-     * @param msg the exception message.
+     * @param message the exception message.
      */
-    public MavenReportException(String msg) {
-        super(msg);
+    public MavenReportException(String message) {
+        super(message);
     }
 
     /**
      * Other constructor.
      *
-     * @param msg the exception message.
+     * @param message the exception message.
      * @param cause the cause.
      */
-    public MavenReportException(String msg, Exception cause) {
-        super(msg, cause);
+    public MavenReportException(String message, Exception cause) {
+        super(message, cause);
     }
 }
