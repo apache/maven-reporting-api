@@ -29,7 +29,7 @@ under the License.
 
   <groupId>org.apache.maven.reporting</groupId>
   <artifactId>maven-reporting-api</artifactId>
-  <version>4.0.0-M12</version>
+  <version>4.0.0-M13-SNAPSHOT</version>
 
   <name>Apache Maven Reporting API</name>
   <description>API to manage report generation.</description>
@@ -57,7 +57,7 @@ under the License.
 
   <properties>
     <javaVersion>8</javaVersion>
-    <project.build.outputTimestamp>2024-05-17T20:17:38Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2024-05-17T20:18:22Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
