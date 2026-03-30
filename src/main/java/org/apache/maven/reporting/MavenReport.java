@@ -72,7 +72,9 @@ public interface MavenReport {
      * {@link #getOutputPath()} instead.
      */
     @Deprecated
-    String getOutputName();
+    default String getOutputName() {
+        return getOutputPath();
+    }
 
     /**
      * Get the category name for this report.
