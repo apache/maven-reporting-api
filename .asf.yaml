@@ -25,7 +25,6 @@ github:
     - maven
   protected_branches:
     master: { }
-    maven-reporting-api-3.x: { }
   pull_requests:
     del_branch_on_merge: true
   enabled_merge_buttons:
