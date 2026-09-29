@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.Locale;
 
 import org.apache.maven.doxia.sink.Sink;
+import org.apache.maven.doxia.sink.SinkFactory;
 
 /**
  * The basis for a Maven report.
@@ -45,12 +46,36 @@ public interface MavenReport {
      * Generate the report depending the wanted locale.
      * <br>
      * Mainly used for external reports like javadoc.
+     * <p>
+     * Note: This method and {@link #generate(Sink, SinkFactory, Locale)} delegate to each other by
+     * default, so an implementation must override at least one of them.
      *
      * @param sink the sink to use for the generation.
      * @param locale the wanted locale to generate the report.
      * @throws MavenReportException if any
+     * @deprecated Implement and use {@link #generate(Sink, SinkFactory, Locale)} instead, passing
+     * {@code null} as the sink factory when no sub-pages can be created.
      */
-    void generate(Sink sink, Locale locale) throws MavenReportException;
+    @Deprecated
+    default void generate(Sink sink, Locale locale) throws MavenReportException {
+        generate(sink, null, locale);
+    }
+
+    /**
+     * Generate the report depending the wanted locale, possibly as several pages.
+     * <p>
+     * A report that renders a single page ignores {@code sinkFactory}. A report that renders several
+     * pages uses {@code sinkFactory} to create the sinks for its sub-pages.
+     *
+     * @param sink the sink to use for the main page.
+     * @param sinkFactory the factory for sub-page sinks, or {@code null} when sub-pages cannot be created.
+     * @param locale the wanted locale to generate the report.
+     * @throws MavenReportException if any
+     * @since 4.1.0
+     */
+    default void generate(Sink sink, SinkFactory sinkFactory, Locale locale) throws MavenReportException {
+        generate(sink, locale);
+    }
 
     /**
      * Get the path relative to {@link #getReportOutputDirectory()} where the report's main output
