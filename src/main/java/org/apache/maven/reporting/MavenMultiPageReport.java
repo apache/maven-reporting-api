@@ -31,7 +31,10 @@ import org.apache.maven.doxia.sink.SinkFactory;
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
  * @see MavenReport#generate(Sink, Locale)
  * @since 3.0 (copied in maven-site-plugin 2.0-beta-6)
+ * @deprecated {@link MavenReport#generate(Sink, SinkFactory, Locale)} now exists as a default method,
+ * so implement {@link MavenReport} directly.
  */
+@Deprecated
 public interface MavenMultiPageReport extends MavenReport {
     /**
      * Generate multi page report.
@@ -41,5 +44,6 @@ public interface MavenMultiPageReport extends MavenReport {
      * @param sinkFactory the sink factory to create sub sinks.
      * @throws MavenReportException if an error occurs.
      */
+    @Override
     void generate(Sink sink, SinkFactory sinkFactory, Locale locale) throws MavenReportException;
 }
