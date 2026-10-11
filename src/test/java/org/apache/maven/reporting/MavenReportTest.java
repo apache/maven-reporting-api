@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MavenReportTest {
 
@@ -101,6 +102,9 @@ class MavenReportTest {
         }
     }
 
+    /** A report that overrides neither of the generate methods. */
+    private static class NoGenerateReport extends RecordingReport {}
+
     @Test
     void multiPageCallReachesSinglePageImplementation() throws MavenReportException {
         SinglePageReport report = new SinglePageReport();
@@ -121,5 +125,20 @@ class MavenReportTest {
         assertEquals("multi", report.called);
         assertNull(report.sinkFactory);
         assertSame(LOCALE, report.locale);
+    }
+
+    @Test
+    void multiPageGenerateFailsFastWhenNeitherMethodIsOverridden() {
+        NoGenerateReport report = new NoGenerateReport();
+
+        assertThrows(MavenReportException.class, () -> report.generate(null, null, LOCALE));
+    }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void singlePageGenerateFailsFastWhenNeitherMethodIsOverridden() {
+        NoGenerateReport report = new NoGenerateReport();
+
+        assertThrows(MavenReportException.class, () -> report.generate(null, LOCALE));
     }
 }

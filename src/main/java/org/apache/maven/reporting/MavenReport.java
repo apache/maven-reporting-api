@@ -66,14 +66,31 @@ public interface MavenReport {
      * <p>
      * A report that renders a single page ignores {@code sinkFactory}. A report that renders several
      * pages uses {@code sinkFactory} to create the sinks for its sub-pages.
+     * <p>
+     * An implementation must override this method or the deprecated {@link #generate(Sink, Locale)}.
+     * If it overrides neither, this method throws a {@link MavenReportException} instead of
+     * recursing forever between the two default methods.
      *
      * @param sink the sink to use for the main page.
      * @param sinkFactory the factory for sub-page sinks, or {@code null} when sub-pages cannot be created.
      * @param locale the wanted locale to generate the report.
-     * @throws MavenReportException if any
+     * @throws MavenReportException if any, or if neither this method nor {@link #generate(Sink, Locale)}
+     *         is overridden
      * @since 4.1.0
      */
     default void generate(Sink sink, SinkFactory sinkFactory, Locale locale) throws MavenReportException {
+        try {
+            // Only delegate to the deprecated overload when it is actually overridden. Otherwise the
+            // two default methods would call each other until a StackOverflowError is thrown.
+            if (getClass().getMethod("generate", Sink.class, Locale.class).isDefault()) {
+                throw new MavenReportException(
+                        "A MavenReport implementation must override generate(Sink, SinkFactory, Locale) "
+                                + "or generate(Sink, Locale)");
+            }
+        } catch (NoSuchMethodException e) {
+            // generate(Sink, Locale) is declared by this interface, so it is always present.
+            throw new MavenReportException("Unable to determine the report generation method", e);
+        }
         generate(sink, locale);
     }
 
