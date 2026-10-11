@@ -28,23 +28,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MavenReportTest {
 
     private static final Locale LOCALE = Locale.ENGLISH;
 
-    /** Records which generate method the implementation received. */
-    private abstract static class RecordingReport implements MavenReport {
-        String called;
-        Sink sink;
-        SinkFactory sinkFactory;
-        Locale locale;
-
-        @Override
-        public String getOutputPath() {
-            return "report";
-        }
-
+    /**
+     * Implements every {@link MavenReport} method except the output path/name, which are
+     * deliberately left to subclasses so that the default delegation can be exercised.
+     */
+    private abstract static class StubReport implements MavenReport {
         @Override
         public String getCategoryName() {
             return CATEGORY_PROJECT_REPORTS;
@@ -79,6 +73,14 @@ class MavenReportTest {
         }
     }
 
+    /** Records which generate method the implementation received. */
+    private abstract static class RecordingReport extends StubReport {
+        String called;
+        Sink sink;
+        SinkFactory sinkFactory;
+        Locale locale;
+    }
+
     /** A report written before 4.1.0: implements only the single-page method. */
     private static class SinglePageReport extends RecordingReport {
         @Override
@@ -98,6 +100,26 @@ class MavenReportTest {
             this.sink = sink;
             this.sinkFactory = sinkFactory;
             this.locale = locale;
+        }
+    }
+
+    /** A report that overrides neither getOutputPath() nor getOutputName(). */
+    private static class NoOutputPathReport extends StubReport {}
+
+    /** A report that only implements the recommended getOutputPath(). */
+    private static class OutputPathReport extends StubReport {
+        @Override
+        public String getOutputPath() {
+            return "path";
+        }
+    }
+
+    /** A report that only implements the deprecated getOutputName(). */
+    private static class OutputNameReport extends StubReport {
+        @Override
+        @SuppressWarnings("deprecation")
+        public String getOutputName() {
+            return "name";
         }
     }
 
@@ -121,5 +143,38 @@ class MavenReportTest {
         assertEquals("multi", report.called);
         assertNull(report.sinkFactory);
         assertSame(LOCALE, report.locale);
+    }
+
+    @Test
+    void getOutputPathFailsFastWhenNeitherMethodIsImplemented() {
+        NoOutputPathReport report = new NoOutputPathReport();
+
+        assertThrows(UnsupportedOperationException.class, report::getOutputPath);
+    }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void getOutputNameFailsFastWhenNeitherMethodIsImplemented() {
+        NoOutputPathReport report = new NoOutputPathReport();
+
+        assertThrows(UnsupportedOperationException.class, report::getOutputName);
+    }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void getOutputNameDelegatesToOverriddenGetOutputPath() {
+        OutputPathReport report = new OutputPathReport();
+
+        assertEquals("path", report.getOutputPath());
+        assertEquals("path", report.getOutputName());
+    }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void getOutputPathDelegatesToOverriddenGetOutputName() {
+        OutputNameReport report = new OutputNameReport();
+
+        assertEquals("name", report.getOutputName());
+        assertEquals("name", report.getOutputPath());
     }
 }

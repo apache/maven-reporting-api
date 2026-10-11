@@ -84,11 +84,28 @@ public interface MavenReport {
      * <p>
      * Note: This method won't be {@code default} anymore when {@link #getOutputName()} is removed.
      * You are advised to implement it as soon as possible.
+     * <p>
+     * An implementation must override this method or the deprecated {@link #getOutputName()}. If it
+     * overrides neither, this method throws an {@link UnsupportedOperationException} instead of
+     * recursing forever between the two default methods.
      *
      * @since 4.0.0
      * @return the relative output path of this report
+     * @throws UnsupportedOperationException if neither this method nor {@link #getOutputName()} is
+     *         overridden
      */
     default String getOutputPath() {
+        try {
+            // Only delegate to the deprecated method when it is actually overridden. Otherwise the
+            // two default methods would call each other until a StackOverflowError is thrown.
+            if (getClass().getMethod("getOutputName").isDefault()) {
+                throw new UnsupportedOperationException(
+                        "A MavenReport implementation must override getOutputPath() or getOutputName()");
+            }
+        } catch (NoSuchMethodException e) {
+            // getOutputName() is declared by this interface, so it is always present.
+            throw new IllegalStateException(e);
+        }
         return getOutputName();
     }
 
