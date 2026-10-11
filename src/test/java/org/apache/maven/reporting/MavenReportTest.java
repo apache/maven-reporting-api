@@ -26,7 +26,6 @@ import org.apache.maven.doxia.sink.SinkFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 class MavenReportTest {
@@ -82,21 +81,9 @@ class MavenReportTest {
     /** A report written before 4.1.0: implements only the single-page method. */
     private static class SinglePageReport extends RecordingReport {
         @Override
-        @SuppressWarnings("deprecation")
         public void generate(Sink sink, Locale locale) {
             called = "single";
             this.sink = sink;
-            this.locale = locale;
-        }
-    }
-
-    /** A report written against 4.1.0: implements only the multi-page method. */
-    private static class MultiPageReport extends RecordingReport {
-        @Override
-        public void generate(Sink sink, SinkFactory sinkFactory, Locale locale) {
-            called = "multi";
-            this.sink = sink;
-            this.sinkFactory = sinkFactory;
             this.locale = locale;
         }
     }
@@ -108,18 +95,6 @@ class MavenReportTest {
         report.generate(null, null, LOCALE);
 
         assertEquals("single", report.called);
-        assertSame(LOCALE, report.locale);
-    }
-
-    @Test
-    @SuppressWarnings("deprecation")
-    void singlePageCallReachesMultiPageImplementationWithoutFactory() throws MavenReportException {
-        MultiPageReport report = new MultiPageReport();
-
-        report.generate(null, LOCALE);
-
-        assertEquals("multi", report.called);
-        assertNull(report.sinkFactory);
         assertSame(LOCALE, report.locale);
     }
 }

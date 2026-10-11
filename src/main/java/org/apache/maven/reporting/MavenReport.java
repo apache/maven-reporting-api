@@ -47,25 +47,20 @@ public interface MavenReport {
      * <br>
      * Mainly used for external reports like javadoc.
      * <p>
-     * Note: This method and {@link #generate(Sink, SinkFactory, Locale)} delegate to each other by
-     * default, so an implementation must override at least one of them.
+     * A report that renders several pages also overrides {@link #generate(Sink, SinkFactory, Locale)}.
      *
      * @param sink the sink to use for the generation.
      * @param locale the wanted locale to generate the report.
      * @throws MavenReportException if any
-     * @deprecated Implement and use {@link #generate(Sink, SinkFactory, Locale)} instead, passing
-     * {@code null} as the sink factory when no sub-pages can be created.
      */
-    @Deprecated
-    default void generate(Sink sink, Locale locale) throws MavenReportException {
-        generate(sink, null, locale);
-    }
+    void generate(Sink sink, Locale locale) throws MavenReportException;
 
     /**
      * Generate the report depending the wanted locale, possibly as several pages.
      * <p>
      * A report that renders a single page ignores {@code sinkFactory}. A report that renders several
-     * pages uses {@code sinkFactory} to create the sinks for its sub-pages.
+     * pages uses {@code sinkFactory} to create the sinks for its sub-pages. By default, this method
+     * renders a single page with {@link #generate(Sink, Locale)}.
      *
      * @param sink the sink to use for the main page.
      * @param sinkFactory the factory for sub-page sinks, or {@code null} when sub-pages cannot be created.
