@@ -46,6 +46,12 @@ class MavenReportTest {
         }
 
         @Override
+        @SuppressWarnings("deprecation")
+        public String getOutputName() {
+            return getOutputPath();
+        }
+
+        @Override
         public String getCategoryName() {
             return CATEGORY_PROJECT_REPORTS;
         }
