@@ -25,7 +25,9 @@ import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.doxia.sink.SinkFactory;
 
 /**
- * The basis for a Maven report.
+ * The basis for a Maven report: a report that the Maven Site Plugin renders into the project site.
+ * Report plugins usually extend {@code AbstractMavenReport} from Maven Reporting Implementation
+ * instead of implementing this interface directly.
  *
  * @author Brett Porter
  * @author <a href="evenisse@apache.org">Emmanuel Venisse</a>
@@ -43,11 +45,10 @@ public interface MavenReport {
     String CATEGORY_PROJECT_REPORTS = "Project Reports";
 
     /**
-     * Generate the report depending the wanted locale.
-     * <br>
-     * Mainly used for external reports like javadoc.
+     * Generate the report for the given locale.
      * <p>
-     * A report that renders several pages also overrides {@link #generate(Sink, SinkFactory, Locale)}.
+     * A report that renders a single page implements only this method. A report that renders several
+     * pages also overrides {@link #generate(Sink, SinkFactory, Locale)}.
      *
      * @param sink the sink to use for the generation.
      * @param locale the wanted locale to generate the report.
@@ -56,7 +57,7 @@ public interface MavenReport {
     void generate(Sink sink, Locale locale) throws MavenReportException;
 
     /**
-     * Generate the report depending the wanted locale, possibly as several pages.
+     * Generate the report for the given locale, possibly as several pages.
      * <p>
      * A report that renders a single page ignores {@code sinkFactory}. A report that renders several
      * pages uses {@code sinkFactory} to create the sinks for its sub-pages. By default, this method
@@ -75,7 +76,7 @@ public interface MavenReport {
     /**
      * Get the path relative to {@link #getReportOutputDirectory()} where the report's main output
      * file will be written. The last component is the name of the file without any extension. The
-     * actual output extension will by added by the sink implementation.
+     * actual output extension is added by the sink implementation.
      * <p>
      * Note: This method won't be {@code default} anymore when {@link #getOutputName()} is removed.
      * You are advised to implement it as soon as possible.
@@ -88,6 +89,9 @@ public interface MavenReport {
     }
 
     /**
+     * Get the name of the report's main output file, without any extension.
+     *
+     * @return the output name of this report
      * @deprecated Method name does not properly reflect its purpose. Implement and use
      * {@link #getOutputPath()} instead.
      */
@@ -134,19 +138,20 @@ public interface MavenReport {
     File getReportOutputDirectory();
 
     /**
-     * An external report is a report which calls a third party program which generates some reports too.
-     * A good example is javadoc tool.
+     * Tell whether this report writes its own output files instead of rendering into the sink, as the
+     * Javadoc report does when it calls the javadoc tool. The Maven Site Plugin does not decorate an
+     * external report with the site skin.
      *
-     * @return {@code true} if this report is external, {@code false} otherwise.
-     * Default should be {@code false}.
+     * @return {@code true} if this report is external, {@code false} otherwise. Most reports return
+     * {@code false}.
      */
     boolean isExternalReport();
 
     /**
-     * Verify some conditions before generating the report.
+     * Verify some conditions before generating the report, for example that there is something to
+     * report on. The Maven Site Plugin skips a report that returns {@code false}.
      *
      * @return {@code true} if this report can be generated, {@code false} otherwise.
-     * Default should be {@code true}.
      * @throws MavenReportException if any
      */
     boolean canGenerateReport() throws MavenReportException;

@@ -19,7 +19,7 @@
 package org.apache.maven.reporting;
 
 /**
- * Basis for rendering report.
+ * Renders the content of a report.
  *
  * @author <a href="mailto:jason@maven.org">Jason van Zyl</a>
  * @author <a href="evenisse@apache.org">Emmanuel Venisse</a>
@@ -27,12 +27,15 @@ package org.apache.maven.reporting;
  */
 public interface MavenReportRenderer {
     /**
+     * Get the report's title.
+     *
      * @return the wanted report's title.
      */
     String getTitle();
 
     /**
-     * Renderer a report.
+     * Render the report.
+     *
      * @throws MavenReportException if any
      */
     void render() throws MavenReportException;
