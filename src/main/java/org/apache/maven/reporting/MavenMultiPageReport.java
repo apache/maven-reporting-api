@@ -24,9 +24,10 @@ import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.doxia.sink.SinkFactory;
 
 /**
- * Interface created separately for backwards compatibility. This method
- * would ideally have been added in the {@link MavenReport} interface, and the other 'generate'
- * method dropped. But that would have rendered all reporting mojo's uncompilable and binary incompatible.
+ * A report that renders several pages. Before 4.1.0 this interface was the only way for a report to
+ * receive a {@link SinkFactory}: adding an abstract method to {@link MavenReport} would have broken
+ * every existing report. Since 4.1.0, {@link MavenReport} declares
+ * {@link MavenReport#generate(Sink, SinkFactory, Locale)} as a default method.
  *
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
  * @see MavenReport#generate(Sink, Locale)

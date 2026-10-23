@@ -30,7 +30,7 @@ public class MavenReportException extends Exception {
     public static final long serialVersionUID = -6200353563231163785L;
 
     /**
-     * Default constructor.
+     * Create an exception with a message.
      *
      * @param message the exception message.
      */
@@ -39,7 +39,7 @@ public class MavenReportException extends Exception {
     }
 
     /**
-     * Other constructor.
+     * Create an exception with a message and a cause.
      *
      * @param message the exception message.
      * @param cause the cause.
