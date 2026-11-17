@@ -95,7 +95,7 @@ class MavenReportTest {
     }
 
     @Test
-    void multiPageCallReachesSinglePageImplementation() throws Exception {
+    void multiPageCallReachesSinglePageImplementation() throws MavenReportException {
         SinglePageReport report = new SinglePageReport();
 
         report.generate(null, null, LOCALE);
