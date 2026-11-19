@@ -57,8 +57,7 @@ doxia-sink-api
        └─ maven-site-plugin      calls MavenReport and renders the pages
 ```
 
-Every report plugin implements this API, so a new method must be a `default`
-method, never abstract. Releases follow Doxia and come before
+New methods must be `default` and two defaults must never call each other — see the [Javadoc](https://maven.apache.org/shared/maven-reporting-api/apidocs/org/apache/maven/reporting/package-summary.html) or [AGENTS.md Compatibility](AGENTS.md#compatibility). Releases follow Doxia and come before
 [Maven Reporting Exec](https://maven.apache.org/shared/maven-reporting-exec/),
 Maven Reporting Implementation and the Maven Site Plugin.
 
