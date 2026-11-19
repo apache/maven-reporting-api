@@ -22,7 +22,6 @@ import java.io.File;
 import java.util.Locale;
 
 import org.apache.maven.doxia.sink.Sink;
-import org.apache.maven.doxia.sink.SinkFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,8 +34,6 @@ class MavenReportTest {
     /** Records which generate method the implementation received. */
     private abstract static class RecordingReport implements MavenReport {
         String called;
-        Sink sink;
-        SinkFactory sinkFactory;
         Locale locale;
 
         @Override
@@ -89,7 +86,6 @@ class MavenReportTest {
         @Override
         public void generate(Sink sink, Locale locale) {
             called = "single";
-            this.sink = sink;
             this.locale = locale;
         }
     }
