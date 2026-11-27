@@ -54,9 +54,4 @@ to format the files, then `mvn verify`. Run Spotless with JDK 17 or 21.
 
 ### Integration tests
 
-Prefer a unit test. Add an invoker IT only for behavior that needs a real Maven build. Follow these rules for ITs:
-
-- Write hook scripts as described in [Pre and post build scripts](https://maven.apache.org/plugins/maven-invoker-plugin/examples/pre-post-build-script.html).
-- When you run a subset with `-Dinvoker.test`, also list the setup and parent projects that the ITs need
-  (`setupIncludes`).
-- Select an IT whose POM is not `pom.xml` as `<it>/<file>.xml`.
+This module has no integration tests. Cover behavior with unit tests.
